@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.net.BindException;
 import java.time.Instant;
+import java.time.ZoneId;
 
 //import java.util.logging.Logger;
 
@@ -31,8 +32,19 @@ public class ToDoItemController {
         logger.debug("request to GET index");
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("todoItems", toDoItemRepository.findAll());
-
+        modelAndView.addObject("today", Instant.now().atZone(ZoneId.systemDefault()).toLocalDate().getDayOfWeek());
         return modelAndView;
+    }
+
+    @PostMapping("/todo")
+    public String createTodoItem(@Valid ToDoItem toDoItem, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "add-doto-item";
+        }
+        toDoItem.setCreatedDate(Instant.now());
+        toDoItem.setModifiedDate(Instant.now());
+        toDoItemRepository.save(toDoItem);
+        return "redirect:/";
     }
 
     @PostMapping("/todo/{id}")

@@ -18,6 +18,11 @@ public class ToDoFormController {
     @Autowired
     private ToDoItemRepository toDoItemRepository;
 
+    @GetMapping("/create-todo")
+    public String showCreateForm(ToDoItem toDoItem) {
+        return "add-todo-item";
+    }
+
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
         ToDoItem toDoItem = toDoItemRepository
