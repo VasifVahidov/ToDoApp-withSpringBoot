@@ -15,3 +15,5 @@ Edit page:
 Add ToDo page:
 ![addToDopage_screenshot](https://user-images.githubusercontent.com/25711896/219706274-0ab9acd3-a4a9-4ccb-af75-56afa7f9c8a0.png)
 
+## License
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
